@@ -37,7 +37,7 @@ public class Main {
             gameGrid.print();
             stepCount++;
         } while (!gameGrid.isGameOver(height, width) && stepCount != maxStepCount);
-        System.out.print("Game over\n");
+        System.out.println("Game over");
         if (gameGrid.isGameOver(height, width)) {
             if (isFirstPlayerStep) {
                 System.out.print("First player won");
