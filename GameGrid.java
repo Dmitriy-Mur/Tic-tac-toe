@@ -7,7 +7,7 @@ public class GameGrid {
     private final int inRowToWin;
     private final char[][] grid;
     private final HashMap<Pos, Integer> gameMap ;
-    private record Pos(int height, int width) {};
+    private record Pos(int height, int width) {}
     private final boolean[] horizontalRow;
     private final boolean[] verticalRow;
     private final boolean[] firstDiagonalRow;
@@ -62,19 +62,24 @@ public class GameGrid {
 
     public boolean isGameOver(int height, int width) {
         int index = 0;
-        int ReferenceFieldCondition = gameMap.get(new Pos(height, width));
+        int referenceFieldCondition = gameMap.get(new Pos(height, width));
+        Pos pos;
         for (int i = -inRowToWin + 1; i < inRowToWin; i++) {
-            if (gameMap.containsKey(new Pos(height + i, width))) {
-                verticalRow[index] = gameMap.get(new Pos(height + i, width)) == ReferenceFieldCondition;
+            pos = new Pos(height + i, width);
+            if (gameMap.containsKey(pos)) {
+                verticalRow[index] = gameMap.get(pos) == referenceFieldCondition;
             }
-            if (gameMap.containsKey(new Pos(height, width + i))) {
-                horizontalRow[index] = gameMap.get(new Pos(height, width + i)) == ReferenceFieldCondition;
+            pos = new Pos(height, width + i);
+            if (gameMap.containsKey(pos)) {
+                horizontalRow[index] = gameMap.get(pos) == referenceFieldCondition;
             }
-            if (gameMap.containsKey(new Pos(height - i, width + i))) {
-                firstDiagonalRow[index] = gameMap.get(new Pos(height - i, width + i)) == ReferenceFieldCondition;
+            pos = new Pos(height - i, width + i);
+            if (gameMap.containsKey(pos)) {
+                firstDiagonalRow[index] = gameMap.get(pos) == referenceFieldCondition;
             }
-            if (gameMap.containsKey(new Pos(height + i, width + i))) {
-                secondDiagonalRow[index] = gameMap.get(new Pos(height + i, width + i)) == ReferenceFieldCondition;
+            pos = new Pos(height + i, width + i);
+            if (gameMap.containsKey(pos)) {
+                secondDiagonalRow[index] = gameMap.get(pos) == referenceFieldCondition;
             }
             index++;
         }

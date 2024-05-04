@@ -21,26 +21,25 @@ public class Main {
         GameGrid gameGrid = new GameGrid(height, width, inRowToWin);
         gameGrid.print();
         int stepCount = 0;
-        boolean isGameOver = false;
+        boolean isFirstPlayerStep = false;
         int maxStepCount = height * width;
         do {
+            isFirstPlayerStep = !isFirstPlayerStep;
             do {
-                if (stepCount % 2 == 0) {
+                if (isFirstPlayerStep) {
                     System.out.print("First player step\n>> ");
                 } else {
                     System.out.print("Second player step\n>> ");
                 }
-
                 height = scanner.nextInt() - 1;
                 width = scanner.nextInt() - 1;
-            } while (!gameGrid.tryPut(height, width, (stepCount % 2) == 0));
-
+            } while (!gameGrid.tryPut(height, width, isFirstPlayerStep));
             gameGrid.print();
             stepCount++;
         } while (!gameGrid.isGameOver(height, width) && stepCount != maxStepCount);
         System.out.print("Game over\n");
         if (gameGrid.isGameOver(height, width)) {
-            if (stepCount % 2 != 0) {
+            if (isFirstPlayerStep) {
                 System.out.print("First player won");
             } else {
                 System.out.print("Second player won");
